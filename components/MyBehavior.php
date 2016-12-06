@@ -5,22 +5,28 @@ use yii\base\Behavior;
 
 class MyBehavior extends Behavior
 {
-    public static function cutString($string, $length)
+    public $fieldData;
+    public $offset = 20;
+    public $word = 'posuere';
+
+    public function cutString()
     {
-        $result = substr($string, 0, $length);
+        $result = substr($this->fieldData, 0, $this->offset);
 
         return $result.'...';
     }
 
-    public static function upperString($string) {
-        $result = strtoupper($string);
+    public function upperString()
+    {
+        $result = strtoupper($this->fieldData);
 
         return $result;
     }
 
-    public static function boldString($string, $word) {
-        if (strripos($string, $word)) {
-            $result = str_replace($word, '<b>'.$word.'</b>', $string);
+    public function boldString()
+    {
+        if (strripos($this->fieldData, $this->word)) {
+            $result = str_replace($this->word, '<b>'.$this->word.'</b>', $this->fieldData);
         } else {
             $result = 0;
         }

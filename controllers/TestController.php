@@ -53,11 +53,11 @@ class TestController extends Controller
 
             $id = $request->post('operation-number');
             if ($id == 1) {
-                $result = $model->cutString($request->post('string_1'), $request->post('offset'));
+                $result = $model->cutString();
             } elseif ($id == 2) {
-                $result = $model->upperString($request->post('string_2'));
+                $result = $model->upperString();
             } else {
-                $result = $model->boldString($request->post('string_3'), $request->post('word'));
+                $result = $model->boldString();
             }
 
             echo $result;
@@ -66,6 +66,15 @@ class TestController extends Controller
                 'route' => \Yii::$app->getUrlManager()->createUrl('test/index'),
             ]);
         }
+    }
+
+    public function actionPosts() {
+        $model = new Test();
+        $posts = $model->getPosts();
+
+        return $this->render('posts', [
+            'posts' => $posts,
+        ]);
     }
 
 }
